@@ -1,0 +1,9 @@
+
+{% set prefix = "css-particles" %}
+<div class="{{ prefix }}-fixed">
+    <div class="{{ prefix }}-container">
+        {% for i in range(0, 100) %}
+        <div class="{{ prefix }}-{{ i }}"></div>
+        {% endfor %}
+    </div>
+</div>

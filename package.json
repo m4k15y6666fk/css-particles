@@ -1,0 +1,22 @@
+{
+  "name": "css-particles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.html",
+  "engines": {
+    "node": "^18.12.0"
+  },
+  "scripts": {
+    "build:html": "node ./scripts/render.mjs",
+    "build:css": "sass ./src/css-particles.scss ./dist/css-particles.css",
+    "build": "npm run build:html && npm run build:css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [ "css", "scss" ],
+  "author": "M4K-15Y-6666-FK",
+  "license": "MIT",
+  "devDependencies": {
+    "nunjucks": "^3.2.3",
+    "sass": "^1.58.3"
+  }
+}

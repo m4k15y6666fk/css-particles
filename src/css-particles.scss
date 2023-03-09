@@ -1,0 +1,93 @@
+@function rand($min, $max) {
+  @return random() * ($max - $min) + $min;
+}
+
+$prefix: "css-particles" !default;
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+.#{$prefix}-fixed, .#{$prefix}-container {
+    width: 100vw;
+    height: 100vh;
+}
+.#{$prefix}-fixed {
+    position: fixed;
+}
+.#{$prefix}-container {
+    position: relative;
+    mix-blend-mode: multiply;
+}
+
+@for $i from 0 to 100 {
+    $center-x: calc( rand(-5, 105) * 1vw );
+    $center-y: calc( rand(85, 95) * 1vh );
+
+    $opacity: rand(0.25, 1);
+
+
+    .#{$prefix}-#{$i} {
+        position: absolute;
+        background: #212121;
+        opacity: 0;
+        width: inherit;
+        height: inherit;
+
+        opacity: $opacity;
+    }
+
+
+    @media (orientation: portrait) {
+        $size-portrait: calc( rand(1, 2.5) * 1vh );
+
+        $start-portrait-y: 20vh;
+        $end-portrait-y: -120vh;
+
+
+        .#{$prefix}-#{$i} {
+            clip-path: inset(calc( $center-y - $size-portrait ) calc( 100vw - ( $center-x + $size-portrait ) ) calc( 100vh - ( $center-y + $size-portrait ) ) calc( $center-x - $size-portrait ));
+
+            transform: translateY($start-portrait-y);
+            animation: particle-#{$i}-portrait calc(rand(3, 9) * 1s) calc(rand(-10, 0) * 1s) linear infinite;
+        }
+
+        @keyframes particle-#{$i}-portrait {
+            0% {
+                opacity: $opacity;
+                transform: translateY($start-portrait-y);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY($end-portrait-y);
+            }
+        }
+    }
+
+    @media (orientation: landscape) {
+        $size-landscape: calc( rand(1, 2.5) * 1vw );
+
+        $start-landscape-y: calc( 15vh + 5vw );
+        $end-landscape-y: calc( -115vh - 5vw );
+
+
+        .#{$prefix}-#{$i} {
+            clip-path: inset(calc( $center-y - $size-landscape ) calc( 100vw - ( $center-x + $size-landscape ) ) calc( 100vh - ( $center-y + $size-landscape ) ) calc( $center-x - $size-landscape ));
+
+            transform: translateY($start-landscape-y);
+            animation: particle-#{$i}-landscape calc(rand(3, 9) * 1s) calc(rand(-10, 0) * 1s) linear infinite;
+        }
+
+        @keyframes particle-#{$i}-landscape {
+            0% {
+                opacity: $opacity;
+                transform: translateY($start-landscape-y);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY($end-landscape-y);
+            }
+        }
+    }
+}
